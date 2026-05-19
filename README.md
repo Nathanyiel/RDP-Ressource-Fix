@@ -18,4 +18,3 @@ This script automates the application of the `RedirectionWarningDialogVersion` r
    * Move the `RDP_Autostart.bat` file into this folder.
 
 ---
-> *Powered by Nate's RDP-Magic (v1.0)*
