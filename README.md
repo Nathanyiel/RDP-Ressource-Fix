@@ -16,5 +16,3 @@ This script automates the application of the `RedirectionWarningDialogVersion` r
 3. **Configure Startup:**
    * Press `Win + R`, type `shell:startup`, and hit Enter.
    * Move the `RDP_Autostart.bat` file into this folder.
-
----
