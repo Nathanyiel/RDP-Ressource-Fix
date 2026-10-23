@@ -1,37 +1,35 @@
 @echo off
 setlocal
-title RDP Autostart Fix - Testversion
+title RDP Resource Warning Fix
 
-:: 1. Pfad zur Registry-Datei festlegen (Hardcoded)
+:: Path to the registry file. Change it if you keep rdp.reg somewhere else.
 set "regFile=C:\scripts\rdp.reg"
 
 echo ============================================================
-echo   RDP AUTOSTART FIX (Manueller Pfad)
+echo   RDP Resource Warning Fix
 echo ============================================================
 echo.
 
-:: 2. Überprüfen, ob die Datei existiert
 if exist "%regFile%" (
-    echo Fuehre Registry-Fix aus: %regFile%
-    
-    :: regedit /s führt die Datei ohne Bestätigungsdialog aus
+    echo Applying registry fix: %regFile%
+
+    :: regedit /s imports the file without a confirmation dialog
     regedit.exe /s "%regFile%"
-    
-    if %errorlevel% equ 0 (
-        echo [OK] Registry-Befehl wurde gesendet.
+
+    if errorlevel 1 (
+        echo [!] The import failed.
+        echo     Administrator rights are probably missing ^(needed for HKLM^).
     ) else (
-        echo [!] Hinweis: Fehler beim Importieren. 
-        echo     (Wahrscheinlich fehlen Admin-Rechte fuer HKLM)
+        echo [OK] Registry file imported.
     )
 ) else (
-    echo [FEHLER] Datei nicht gefunden unter: %regFile%
-    echo Bitte stelle sicher, dass der Ordner C:\scripts existiert.
+    echo [ERROR] File not found: %regFile%
+    echo Make sure the folder C:\scripts exists and contains rdp.reg.
 )
 
 echo.
 echo ============================================================
-echo   Vorgang beendet.
+echo   Done.
 echo ============================================================
-:: exit schliesst das Fenster sofort. 
-:: Zum Testen kannst du 'pause' statt 'exit' nutzen.
+:: "exit" closes the window right away. Use "pause" instead while testing.
 exit
